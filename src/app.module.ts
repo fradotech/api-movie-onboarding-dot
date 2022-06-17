@@ -1,10 +1,38 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+import AppConfig, { DbConfigMysql } from './config/app.config';
+import { ExistValidator } from './utils/validator/exist.validator';
+import { MainModule } from './modules/main.module';
+import { LoggerMiddleware } from './utils/logger/logger.middlewate';
+
+const dbConfigMysql: DbConfigMysql = AppConfig().db.mysql;
 
 @Module({
-  imports: [],
+  imports: [
+    MainModule,
+    ConfigModule.forRoot({
+      load: [AppConfig],
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: dbConfigMysql.host,
+      port: dbConfigMysql.port,
+      username: dbConfigMysql.user,
+      password: dbConfigMysql.password,
+      database: dbConfigMysql.database,
+      entities: ["dist/**/*.entity{.ts,.js}"],
+      autoLoadEntities: true,
+      synchronize: true,
+    }),
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ExistValidator],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+      consumer.apply(LoggerMiddleware).forRoutes('*')
+  }
+}
