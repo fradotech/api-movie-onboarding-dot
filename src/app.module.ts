@@ -4,9 +4,9 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import AppConfig, { DbConfigMysql } from './config/app.config';
-import { ExistValidator } from './utils/validator/exist.validator';
+import { ExistValidator } from './utils/validators/exist.validator';
 import { MainModule } from './modules/main.module';
-import { LoggerMiddleware } from './utils/logger/logger.middlewate';
+import { LoggerMiddleware } from './utils/middlewares/logger.middleware';
 
 const dbConfigMysql: DbConfigMysql = AppConfig().db.mysql;
 
