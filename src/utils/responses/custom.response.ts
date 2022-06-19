@@ -1,32 +1,28 @@
-import { HttpStatus } from '@nestjs/common';
 import { Pagination } from 'nestjs-typeorm-paginate';
 
-export interface IApiResponse<T> {
+export interface ApiResponse<T> {
+  statusCode: number,
   success: boolean;
   message: string;
   data: T | Pagination<T>;
 }
 
 export class CustomResponse {
-  static async success<T>(
-    message: string,
-    data: T | Pagination<T>,
-  ): Promise<IApiResponse<T>> {
+  static async success<T>(statusCode: number, data: T | Pagination<T>, message: string): Promise<ApiResponse<T>> {
     return {
       success: true,
-      message: message,
-      data: data,
+      statusCode,
+      message,
+      data,
     };
   }
 
-  static async error<T>(
-    data: T | Pagination<T>,
-    message: string,
-  ): Promise<IApiResponse<T>> {
+  static async error<T>(statusCode: number, data: T | Pagination<T>, message: string): Promise<ApiResponse<T>> {
     return {
       success: false,
-      message: message,
-      data: data,
+      statusCode,
+      message,
+      data,
     };
   }
 }

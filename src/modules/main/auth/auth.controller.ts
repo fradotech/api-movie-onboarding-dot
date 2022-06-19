@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Request, Get, UseGuards, UseInterceptors, UploadedFile, Res } from '@nestjs/common';
+import { Controller, Post, Body, UseInterceptors, UploadedFile, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginAuthDto } from './dto/login-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
@@ -17,13 +17,13 @@ export class AuthController {
     createUserDto.avatar = file.filename
     let user = await this.authService.register(createUserDto)
 
-    return CustomResponse.success('Register successfull', user)
+    return CustomResponse.success(HttpStatus.CREATED, user, 'Register successfull')
   }
 
   @Post('login')
   async login(@Body() loginAuthDto: LoginAuthDto) {
     const loginData = await this.authService.login(loginAuthDto)
 
-    return CustomResponse.success('Login successfull', loginData)
+    return CustomResponse.success(HttpStatus.ACCEPTED, loginData, 'Login successfull')
   }
 }

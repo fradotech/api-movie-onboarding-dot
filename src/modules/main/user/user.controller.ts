@@ -1,4 +1,4 @@
-import { Controller, Get, Request, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Request, Res, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CustomResponse } from 'src/utils/responses/custom.response';
 import { JwtGuard } from '../auth/jwt.guard';
@@ -12,7 +12,7 @@ export class UserController {
   
   @Get()
   async me(@Request() req: any) {
-    return CustomResponse.success('Get user successfull', req.user)
+    return CustomResponse.success(HttpStatus.OK, req.user, 'Get user successfull')
   }
 
   @Get('avatar')
