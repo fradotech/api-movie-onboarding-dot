@@ -4,8 +4,8 @@ import { User } from "./entities/user.entity";
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
-  async createUser(createUserDto: CreateUserDto): Promise<User | null> {
-    return await this.findOne(createUserDto)
+  async saveOne(createUserDto: CreateUserDto): Promise<User | null> {
+    return await this.save(createUserDto)
   }
 
   async findOneById(id: number): Promise<User | null> {

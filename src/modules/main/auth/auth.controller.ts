@@ -13,7 +13,7 @@ export class AuthController {
 
   @Post('register')
   @UseInterceptors(FileInterceptor('avatar', { dest: './public/users/avatar' }))
-  async register(@Body() createUserDto: CreateUserDto, @UploadedFile() file: Express.Multer.File) {
+  async register(@Body() createUserDto: CreateUserDto, @UploadedFile() file: Express.Multer.File): Promise<CustomResponse> {
     createUserDto.avatar = file.filename
     let user = await this.authService.register(createUserDto)
 
@@ -21,7 +21,7 @@ export class AuthController {
   }
 
   @Post('login')
-  async login(@Body() loginAuthDto: LoginAuthDto) {
+  async login(@Body() loginAuthDto: LoginAuthDto): Promise<CustomResponse> {
     const loginData = await this.authService.login(loginAuthDto)
 
     return CustomResponse.success(HttpStatus.ACCEPTED, loginData, 'Login successfull')

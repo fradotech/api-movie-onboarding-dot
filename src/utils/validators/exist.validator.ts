@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { getConnection } from 'typeorm';
+import { getManager } from 'typeorm';
 
 @ValidatorConstraint({ async: true })
 @Injectable()
 export class ExistValidator implements ValidatorConstraintInterface {
   async validate(value: any, validationArguments: ValidationArguments){
     let data = { [validationArguments.constraints[1]]: validationArguments.value }
-    let isExist = await getConnection().getRepository(validationArguments.constraints[0]).findOne(data)
+    let isExist = await getManager().getRepository(validationArguments.constraints[0]).findOne(data)
     if(isExist) return false
     return true
   }
