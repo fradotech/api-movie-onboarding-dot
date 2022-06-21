@@ -28,8 +28,8 @@ export class SchedulesService {
     return createdSchedule
   }
 
-  async findAll() {
-    return await this.schedulesRepository.find()
+  findAll() {
+    return this.schedulesRepository.find()
   }
 
   async findOne(id: number) {

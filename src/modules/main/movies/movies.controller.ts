@@ -12,6 +12,13 @@ import { CustomResponse } from 'src/utils/responses/custom.response';
 export class MoviesController {
   constructor(private readonly movieService: MoviesService) {}
 
+  @Get('now-playing')
+  async nowPlaying() {
+    const nowPlaying = await this.movieService.nowPlaying();
+
+    return CustomResponse.success(HttpStatus.OK, nowPlaying, 'Get movie now playing successfull')  
+  }
+
   @Get('tags')
   async findAllTags() {
     const tags = await this.movieService.findAllTags();
@@ -36,8 +43,8 @@ export class MoviesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const movie = await this.movieService.findAll();
+  async findOne(@Param('id') id: number) {
+    const movie = await this.movieService.findOne(id);
 
     return CustomResponse.success(HttpStatus.OK, movie, 'Get movie successfull')  
   }

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Schedule } from '../schedules/entities/schedule.entity';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { MovieTag } from './entities/movie-tag.entity';
 import { Movie } from './entities/movie.entity';
@@ -11,7 +12,8 @@ export class MoviesService {
   constructor(
     @InjectRepository(Movie) private moviesRepository: Repository<Movie>,
     @InjectRepository(Tag) private tagsRepository: Repository<Tag>,
-    @InjectRepository(MovieTag) private moviesTagRepository: Repository<MovieTag>
+    @InjectRepository(MovieTag) private moviesTagRepository: Repository<MovieTag>,
+    @InjectRepository(Schedule) private schedulesRepository: Repository<Schedule>
   ) {}
 
   // Harusnya di MovieRepository tapi entah kenapa error
@@ -47,5 +49,9 @@ export class MoviesService {
 
   findAllTags() {
     return this.tagsRepository.find()
+  }
+
+  nowPlaying() {
+    return this.schedulesRepository.find()
   }
 }

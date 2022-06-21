@@ -5,13 +5,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './entities/movie.entity';
 import { Tag } from './entities/tag.entity';
 import { MovieTag } from './entities/movie-tag.entity';
+import { Schedule } from '../schedules/entities/schedule.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([
       Tag,
       Movie,
-      MovieTag
+      MovieTag,
+      Schedule
     ])
   ],
   controllers: [MoviesController],
