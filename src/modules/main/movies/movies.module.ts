@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { MovieService } from './movie.service';
-import { MovieController } from './movie.controller';
+import { MoviesService } from './movies.service';
+import { MoviesController } from './movies.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Movie } from './entities/movie.entity';
 import { Tag } from './entities/tag.entity';
@@ -14,7 +14,7 @@ import { MovieTag } from './entities/movie-tag.entity';
       MovieTag
     ])
   ],
-  controllers: [MovieController],
-  providers: [MovieService]
+  controllers: [MoviesController],
+  providers: [MoviesService]
 })
-export class MovieModule {}
+export class MoviesModule {}

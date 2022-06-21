@@ -15,7 +15,7 @@ export class AuthController {
   @UseInterceptors(FileInterceptor('avatar', { dest: './public/users/avatar' }))
   async register(@Body() createUserDto: CreateUserDto, @UploadedFile() file: Express.Multer.File): Promise<CustomResponse> {
     createUserDto.avatar = file.filename
-    let user = await this.authService.register(createUserDto)
+    const user = await this.authService.register(createUserDto)
 
     return CustomResponse.success(HttpStatus.CREATED, user, 'Register successfull')
   }

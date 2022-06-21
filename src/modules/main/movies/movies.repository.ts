@@ -3,7 +3,7 @@ import { CreateMovieDto } from "./dto/create-movie.dto";
 import { Movie } from "./entities/movie.entity";
 
 @EntityRepository(Movie)
-export class MovieRepository extends Repository<Movie> {
+export class MoviesRepository extends Repository<Movie> {
   async saveOne(createMovieDto: CreateMovieDto): Promise<Movie | null> {
     return await this.save(createMovieDto)
   }
