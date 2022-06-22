@@ -13,17 +13,12 @@ export class SchedulesService {
   ) {}
 
   async create(createScheduleDto: CreateScheduleDto) {
-    const movie = await this.moviesRepository.findOne(createScheduleDto.movie_id)
+    const movie = await this.moviesRepository.findOne(createScheduleDto.movie)
     if(!movie) throw new HttpException('Movie not found', HttpStatus.NOT_FOUND)
     
-    const schedule = {
-      start_time: createScheduleDto.start_time,
-      end_time: createScheduleDto.end_time,
-      movie,
-      date: createScheduleDto.date
-    }
+    createScheduleDto.movie = movie
 
-    const createdSchedule = await this.schedulesRepository.save(schedule)
+    const createdSchedule = await this.schedulesRepository.save(createScheduleDto)
 
     return createdSchedule
   }

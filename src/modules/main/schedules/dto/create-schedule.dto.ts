@@ -10,7 +10,7 @@ export class CreateScheduleDto {
   @IsNotEmpty()
   @IsNumber()
   @ApiProperty()
-  movie_id: Movie
+  movie: Movie
 
   @IsNotEmpty()
   @IsString()
@@ -21,8 +21,4 @@ export class CreateScheduleDto {
   @IsString()
   @ApiProperty()
   end_time: string
-
-  @IsNotEmpty()
-  @ApiProperty()
-  date: string
 }

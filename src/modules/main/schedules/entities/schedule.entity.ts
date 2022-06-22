@@ -15,9 +15,6 @@ export class Schedule {
   @Column()
   end_time: string
 
-  @Column()
-  date: string
-
   @CreateDateColumn()
   created_at: Date;
 

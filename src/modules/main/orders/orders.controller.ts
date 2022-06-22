@@ -21,11 +21,13 @@ import { CustomResponse } from 'src/utils/responses/custom.response';
   async findAll() {
     const orders = await this.ordersService.findAll()
 
-    return CustomResponse.success(HttpStatus.OK, orders, 'Get orders successfull')    }
+    return CustomResponse.success(HttpStatus.OK, orders, 'Get orders successfull')    
+  }
 
   @Get(':id')
   async findOne(@Param('id') id: number) {
     const order = await this.ordersService.findOne(id)
 
-    return CustomResponse.success(HttpStatus.OK, order, 'Get order successfull')    }
+    return CustomResponse.success(HttpStatus.OK, order, 'Get order successfull')    
+  }
 }

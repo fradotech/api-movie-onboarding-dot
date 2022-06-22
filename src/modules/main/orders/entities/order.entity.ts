@@ -10,7 +10,7 @@ export class Order {
   @ManyToOne(type => Schedule, schedule => schedule.id, { eager: true })
   schedule: Schedule
 
-  @ManyToOne(type => User, user => user.id)
+  @ManyToOne(type => User, user => user.id, { eager: true })
   user: User
 
   @CreateDateColumn()
