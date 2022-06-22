@@ -55,4 +55,10 @@ https://localhost:3000/docs
 Postman
 https://documenter.getpostman.com/view/21031688/UzBnsSvG
 
-Loom video
+## Demonstration Video
+
+Loom video part1
+https://www.loom.com/share/afedaa22cb1b4f6cae94706a6ffd6ed8
+
+Loom video part2
+https://www.loom.com/share/adb26ac9f9304594855423af095a4e89
